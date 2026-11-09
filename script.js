@@ -5,7 +5,7 @@ const CONFIG = {
   mapLink: 'https://share.google/NZ39YDChDZYVg8Mxe', // replace with exact map link
   whatsappNumber: '94719249572',      // organizer number, international format, e.g. '94771234567' (blank = choose contact)
   siteUrl: 'https://chat.whatsapp.com/I5QVp4DfawE2aI7Ys5FlOG',             // blank = current page URL
-  music: 'audio//assets/theme.mp3',               // e.g. 'audio/theme.mp3' (optional)
+  music: 'audio/theme.mp3',               // e.g. 'audio/theme.mp3' (optional)
   shareText: 'Countdown is on! Get ready for ECLIPSE 2K22. Join to the Whatsapp group using this link:',
   payMessage: 'Hello, I have completed my ECLIPSE 2K22 party payment. I will share my payment receipt for confirmation.',
   bank: {
