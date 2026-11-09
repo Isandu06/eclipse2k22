@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECLIPSE 2K22 | 2022 O/L Batch Together Party</title>
+<meta name="description" content="Countdown is on! Get ready for ECLIPSE 2K22. One Batch. One Family. Forever!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<button id="musicBtn" class="music" aria-label="Play or pause music">♪</button>
+
+<header class="hero" id="top">
+  <div class="eclipse" aria-hidden="true"><i></i></div>
+  <div class="hero-inner">
+    <p class="batch metal">2022 O/L BATCH</p>
+    <p class="tag-top">YOUR BATCH • OUR MEMORIES • FOREVER</p>
+    <svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE29A"/><stop offset=".5" stop-color="#D6A84B"/><stop offset="1" stop-color="#8a5f1c"/></linearGradient></defs><path d="M8 58 L16 18 L38 38 L60 8 L82 38 L104 18 L112 58 Z" fill="url(#g)"/><rect x="8" y="58" width="104" height="9" rx="3" fill="url(#g)"/><circle cx="16" cy="14" r="5" fill="#FFE29A"/><circle cx="60" cy="5" r="5" fill="#FFE29A"/><circle cx="104" cy="14" r="5" fill="#FFE29A"/></svg>
+    <h1 class="metal title">ECLIPSE</h1>
+    <p class="year">2K22</p>
+    <p class="party metal">PARTY</p>
+    <p class="slogan">Let's Celebrate Together...</p>
+  </div>
+  <a href="#countdown" class="scroll" aria-label="Scroll to countdown">⌄</a>
+</header>
+
+<main>
+<section id="countdown" class="sec reveal">
+  <h2 class="sec-title">THE ECLIPSE BEGINS IN</h2>
+  <div id="timer" class="timer" role="timer" aria-live="off">
+    <div class="box"><span id="d">00</span><small>DAYS</small></div>
+    <div class="box"><span id="h">00</span><small>HOURS</small></div>
+    <div class="box"><span id="m">00</span><small>MINUTES</small></div>
+    <div class="box"><span id="s">00</span><small>SECONDS</small></div>
+  </div>
+  <div id="done" class="done" hidden>
+    <h3>THE ECLIPSE HAS BEGUN!</h3>
+    <p>LET'S MAKE MEMORIES TOGETHER!</p>
+  </div>
+  <button class="cta" id="readyBtn">GET READY!</button>
+</section>
+
+<section id="details" class="sec reveal">
+  <h2 class="sec-title">EVENT DETAILS</h2>
+  <dl class="glass details">
+    <div><dt>Event</dt><dd>ECLIPSE 2K22</dd></div>
+    <div><dt>Batch</dt><dd>2022 O/L BATCH</dd></div>
+    <div><dt>Date</dt><dd>2026 November 28</dd></div>
+    <div><dt>Venue</dt><dd>LIYANADO HOTEL</dd></div>
+  </dl>
+  <a id="mapBtn" class="cta ghost" target="_blank" rel="noopener" href="#">VIEW ON GOOGLE MAPS</a>
+</section>
+
+<section id="memories" class="sec reveal">
+  <h2 class="sec-title"></h2>
+  <div id="gallery" class="gallery"></div>
+</section>
+
+<section id="payment" class="sec reveal">
+  <h2 class="sec-title">SECURE YOUR SPOT – PARTY PAYMENT</h2>
+  <p class="sub">Be part of our unforgettable day. Complete your party payment using the bank details below.</p>
+  <div class="glass bank">
+    <div class="bank-head">
+      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#D6A84B" stroke-width="1.6" aria-hidden="true"><path d="M3 9l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18M3 9h18"/></svg>
+      <b>Bank Transfer</b>
+    </div>
+    <dl id="bankList"></dl>
+    <p class="acc-label">Account Number</p>
+    <p class="acc" id="accNum"></p>
+    <div class="row">
+      <button class="cta" id="copyAcc">COPY ACCOUNT NUMBER</button>
+      <button class="cta ghost" id="copyAll">COPY ALL BANK DETAILS</button>
+    </div>
+  </div>
+  <p class="note">Please transfer your party payment to the above account and keep your bank transaction receipt.</p>
+  <p class="note small">Payments are not verified automatically. Your payment is confirmed only after you send your transaction receipt to the organizers.</p>
+  <a id="payWA" class="cta" target="_blank" rel="noopener" href="#">I'VE PAID – SEND RECEIPT ON WHATSAPP</a>
+</section>
+
+<section id="share" class="sec reveal">
+  <h2 class="sec-title">SPREAD THE WORD</h2>
+  <p class="sub">Countdown is on! Get ready for ECLIPSE 2K22. One Batch. One Family. Forever!</p>
+  <div class="row">
+    <a id="shWA" class="cta ghost" target="_blank" rel="noopener" href="#">WHATSAPP</a>
+    <a id="shFB" class="cta ghost" target="_blank" rel="noopener" href="#">FACEBOOK</a>
+    <button id="copyLink" class="cta ghost">COPY LINK</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>2022 O/L Batch</p>
+  <p class="tag-top">YOUR BATCH • OUR MEMORIES • FOREVER</p>
+  <p class="dev">Web developer: Isandu Jayasinghe</p>
+</footer>
+
+<div id="lightbox" class="lightbox" hidden><button aria-label="Close">✕</button><img alt=""></div>
+<div id="toast" class="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
