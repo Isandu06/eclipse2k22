@@ -122,3 +122,114 @@ function frame() {
 }
 if (!still) frame();
 setTimeout(confetti, 1800);
+
+/* ================= FINANCIAL DASHBOARD =================
+   DAILY UPDATE GUIDE (10:00 PM reconciliation):
+   1. Add / edit expense records in FINANCE.records below.
+   2. Mark approved / released and fill in the date & time fields.
+   3. Update FINANCE.bankBalance with the real bank statement balance.
+   The cards, totals and Balanced / Unbalanced status all
+   recalculate automatically — nothing else needs editing. */
+const FINANCE = {
+  lastUpdated: '2026-11-15T22:00:00+05:30', // daily 10:00 PM reconciliation timestamp
+  openingBalance: 0,        // bank balance before party collections
+  collections: 49925.00,    // total party payments collected (LKR)
+  bankBalance: 41925.00,    // balance per bank statement (LKR)
+  records: [
+    { id: 'EXP-001', desc: 'Breakfast & Lunch',                    amount: 82000.00, approved: false, approvedAt: null,                 
+released: false, releasedAt: null },
+    { id: 'EXP-002', desc: 'Function Hall',                        amount: 20000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
+    { id: 'EXP-003', desc: 'Musics Stuff',                         amount: 23000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
+    { id: 'EXP-004', desc: 'Photography & videography',            amount: 20000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
+    { id: 'EXP-005', desc: 'Decorations',                          amount: 15000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
+    { id: 'EXP-006', desc: 'Key Tag',                              amount:  5000.00, approved: false, approvedAt: null, 
+released: false,  releasedAt: null },
+    { id: 'EXP-007', desc: 'Bite',                                 amount: 12000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
+    { id: 'EXP-008', desc: 'Hotel venue advance – Liyanado Hotel', amount:  4000.00, approved: true,  approvedAt: '2026-11-08 11:34', released: true,  releasedAt: '2026-11-08 11:20' },
+    { id: 'EXP-009', desc: 'Special Cake',                         amount: 8000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null }
+  ]
+};
+
+/* LKR currency formatter: 189000 -> "LKR 189,000.00" */
+const lkr = n => 'LKR ' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+/* --- Automatic reconciliation calculations --- */
+const finTotals = {
+  expenses: FINANCE.records.reduce((t, r) => t + r.amount, 0),
+  approved:   FINANCE.records.reduce((t, r) => t + (r.approved ? r.amount : 0), 0),
+  released:   FINANCE.records.reduce((t, r) => t + (r.released ? r.amount : 0), 0)
+};
+finTotals.ledger = FINANCE.openingBalance + FINANCE.collections - finTotals.released; // committee ledger balance
+finTotals.difference = finTotals.ledger - FINANCE.bankBalance;                        // must be 0 to be Balanced
+finTotals.balanced = Math.abs(finTotals.difference) < 0.01;
+
+/* --- A. Overview cards --- */
+const finCards = [
+  { label: 'Total Expenses',          value: finTotals.expenses,    cap: FINANCE.records.length + ' recorded expenses' },
+  { label: 'Approved Payments',       value: finTotals.approved,    cap: FINANCE.records.filter(r => r.approved).length + ' of ' + FINANCE.records.length + ' approved' },
+  { label: 'Released Payments',       value: finTotals.released,    cap: FINANCE.records.filter(r => r.released).length + ' of ' + FINANCE.records.length + ' released' },
+  { label: 'Current Account Balance', value: FINANCE.bankBalance,   cap: (finTotals.balanced ? 'Reconciled daily at 10:00 PM' : 'Ledger differs by ' + lkr(Math.abs(finTotals.difference))) }
+];
+$('finCards').innerHTML = finCards.map(c => `
+  <div class="fin-card">
+    <span class="fin-label">${c.label}</span>
+    <span class="fin-value" data-target="${c.value}">${lkr(0)}</span>
+    <span class="fin-cap">${c.cap}</span>
+  </div>`).join('');
+
+/* --- B. Expense tracker rows --- */
+const badge = (done, yes, no) => `<span class="fin-badge ${done ? 'ok' : 'pending'}">${done ? '✔ ' + yes : '◌ ' + no}</span>`;
+$('finBody').innerHTML = FINANCE.records.map(r => `
+  <tr>
+    <td>${r.id}</td>
+    <td>${r.desc}</td>
+    <td class="amt">${lkr(r.amount)}</td>
+    <td>${badge(r.approved, 'Yes', 'Pending')}</td>
+    <td>${r.approvedAt || '—'}</td>
+    <td>${badge(r.released, 'Yes', 'Pending')}</td>
+    <td>${r.releasedAt || '—'}</td>
+  </tr>`).join('');
+
+/* --- Table footer: totals + reconciliation status --- */
+$('finFoot').innerHTML = `
+  <tr>
+    <td colspan="2">TOTALS</td>
+    <td class="amt">${lkr(finTotals.expenses)}</td>
+    <td>${FINANCE.records.filter(r => r.approved).length} / ${FINANCE.records.length}</td>
+    <td>—</td>
+    <td>${FINANCE.records.filter(r => r.released).length} / ${FINANCE.records.length}</td>
+    <td>—</td>
+  </tr>
+  <tr class="fin-recon">
+    <td colspan="7">
+      Reconciliation difference:
+      <span class="fin-diff">${lkr(Math.abs(finTotals.difference))}</span>
+      (ledger ${lkr(finTotals.ledger)} vs bank ${lkr(FINANCE.bankBalance)})
+      <span class="fin-status ${finTotals.balanced ? 'balanced' : 'unbalanced'}">
+        ${finTotals.balanced ? 'BALANCED' : 'UNBALANCED'}
+      </span>
+    </td>
+  </tr>`;
+
+/* --- Last-updated stamp --- */
+$('finUpdated').textContent = new Date(FINANCE.lastUpdated).toLocaleString('en-GB', {
+  day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+}) + ' (daily 10:00 PM)';
+
+/* --- Animated count-up for the summary cards --- */
+function countUp(el, target) {
+  if (still) { el.textContent = lkr(target); return; }
+  const t0 = performance.now(), dur = 1300;
+  (function step(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+    el.textContent = lkr(target * eased);
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+const finIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  document.querySelectorAll('#finCards .fin-value').forEach(el => countUp(el, parseFloat(el.dataset.target)));
+  finIO.disconnect();
+}), { threshold: .25 });
+finIO.observe($('finance'));

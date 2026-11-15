@@ -82,6 +82,41 @@
   <a id="payWA" class="cta" target="_blank" rel="noopener" href="#">I'VE PAID – SEND RECEIPT ON WHATSAPP</a>
 </section>
 
+<section id="finance" class="sec reveal">
+  <div class="fin-wrap">
+    <h2 class="sec-title">EVENT ORGANISING COMMITTEE – FINANCIAL DASHBOARD</h2>
+    <p class="sub">Transparent daily tracking of all ECLIPSE 2K22 party funds.</p>
+
+    <!-- A. Financial overview cards (values auto-calculated from FINANCE.records) -->
+    <div class="fin-cards" id="finCards"></div>
+
+    <!-- B. Main expenses tracker -->
+    <div class="fin-panel">
+      <div class="fin-head">
+        <h3>MAIN EXPENSES TRACKER</h3>
+        <p class="fin-updated">Last updated: <span id="finUpdated">—</span></p>
+      </div>
+      <div class="fin-table-wrap">
+        <table class="fin-table">
+          <thead>
+            <tr>
+              <th>Expense ID</th>
+              <th>Description</th>
+              <th>Amount (LKR)</th>
+              <th>Payment Approved?</th>
+              <th>Approval Date &amp; Time</th>
+              <th>Payment Released?</th>
+              <th>Payment Released Date &amp; Time</th>
+            </tr>
+          </thead>
+          <tbody id="finBody"><!-- rows rendered from FINANCE.records --></tbody>
+          <tfoot id="finFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="share" class="sec reveal">
   <h2 class="sec-title">SPREAD THE WORD</h2>
   <p class="sub">Countdown is on! Get ready for ECLIPSE 2K22. One Batch. One Family. Forever!</p>
