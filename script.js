@@ -133,7 +133,7 @@ setTimeout(confetti, 1800);
 const FINANCE = {
   lastUpdated: '2026-11-15T22:00:00+05:30', // daily 10:00 PM reconciliation timestamp
   openingBalance: 0,        // bank balance before party collections
-  collections: 129650.00,    // total party payments collected (LKR)
+  collections: 133650.00,    // total party payments collected (LKR)
   bankBalance: 121650.00,    // balance per bank statement (LKR)
   records: [
     { id: 'EXP-001', desc: 'Breakfast & Lunch',                    amount: 82000.00, approved: false, approvedAt: null,                 
