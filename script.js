@@ -133,8 +133,8 @@ setTimeout(confetti, 1800);
 const FINANCE = {
   lastUpdated: '2026-11-15T22:00:00+05:30', // daily 10:00 PM reconciliation timestamp
   openingBalance: 0,        // bank balance before party collections
-  collections: 110175.00,    // total party payments collected (LKR)
-  bankBalance: 102175.00,    // balance per bank statement (LKR)
+  collections: 129650.00,    // total party payments collected (LKR)
+  bankBalance: 121650.00,    // balance per bank statement (LKR)
   records: [
     { id: 'EXP-001', desc: 'Breakfast & Lunch',                    amount: 82000.00, approved: false, approvedAt: null,                 
 released: false, releasedAt: null },
@@ -147,7 +147,8 @@ released: false,  releasedAt: null },
     { id: 'EXP-007', desc: 'Bite',                                 amount: 12000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
     { id: 'EXP-008', desc: 'Special Cake',                         amount: 8000.00, approved: false, approvedAt: null,                 released: false, releasedAt: null },
     { id: 'EXP-009', desc: 'Hotel venue advance – Liyanado Hotel', amount:  4000.00, approved: true,  approvedAt: '2026-11-10 14:30', released: true,  releasedAt: '2026-11-10 15:15' },
-    { id: 'EXP-010', desc: 'DJ & Sound System advance',            amount:  4000.00, approved: true,  approvedAt: '2026-11-12 10:00', released: true,  releasedAt: '2026-11-12 11:20' }
+    { id: 'EXP-010', desc: 'DJ & Sound System advance',            amount:  4000.00, approved: true,  approvedAt: '2026-11-12 10:00', released: true,  releasedAt: '2026-11-12 11:20' },
+    { id: 'EXP-011', desc: 'Tickets',                              amount:  4000.00, approved: true,  approvedAt: '2026-11-22 14:11', released: true,  releasedAt: '2026-11-22 14:12' },
 
   ]
 };
